@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <map>
-int main() {
-    std::cout << "C++ Standard Version: " << __cplusplus << std::endl;
+#include "trade.h"
+int main(){
     return 0;
 }
