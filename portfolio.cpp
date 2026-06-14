@@ -1,4 +1,7 @@
 #include "portfolio.h"
+#include "trade.h"
+#include <fstream>
+#include <iostream>
     void Portfolio::add_trade(const Trade& t){
         trade.push_back(t);
         if(t.side=="BUY"){
@@ -16,3 +19,14 @@
             }
                 realized[t.symbol]+=(t.price-old_avg)*t.quantity;}
         }
+ void Portfolio::save() {
+        std::ofstream file("trades.csv");
+        if(!(file.is_open())){
+            std::cerr << "Cant open the file !" <<std::endl;
+            return;
+        }
+        file << "symbol|side|quantity|price|timestamp|source"<<std::endl;
+        for(const auto& t : trade){
+            file << t.to_csv() << std::endl;
+        }
+    }
