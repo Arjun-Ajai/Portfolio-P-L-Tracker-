@@ -1,7 +1,9 @@
 #include "portfolio.h"
 #include "trade.h"
 #include <fstream>
+#include <sstream>
 #include <iostream>
+
     void Portfolio::add_trade(const Trade& t){
         trade.push_back(t);
         if(t.side=="BUY"){
@@ -36,6 +38,29 @@ void Portfolio::load() {
             std::cerr << "Cant open the file !" <<std::endl;
             return;
         }
+
         std::string line;
         std::getline(file, line);
+        while (std::getline(file,line)) {
+            Trade t;
+
+            std::stringstream ss(line);
+            std::string token;
+            int column=0;
+            while (getline(ss,token,'|')) {
+                switch(column) {
+                    case 0: t.symbol=token; break;
+                    case 1: t.side=token; break;
+                    case 2: t.quantity=std::stod(token); break;
+                    case 3: t.price=std::stod(token); break;
+                    case 4: t.timestamp=token; break;
+                    case 5: t.source=token; break;
+                    default: break;
+                }
+                column++;
+            }
+            Portfolio::add_trade(t);
+        }
+
+
     }
