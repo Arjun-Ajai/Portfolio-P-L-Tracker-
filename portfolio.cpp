@@ -43,7 +43,6 @@ void Portfolio::load() {
         std::getline(file, line);
         while (std::getline(file,line)) {
             Trade t;
-
             std::stringstream ss(line);
             std::string token;
             int column=0;
@@ -61,6 +60,11 @@ void Portfolio::load() {
             }
             Portfolio::add_trade(t);
         }
+    };
 
-
+void Portfolio::print_history() {
+    for (const auto& t : trade) {
+        std::cout<<t.to_csv() << std::endl;
     }
+
+}
