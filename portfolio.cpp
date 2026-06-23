@@ -30,3 +30,12 @@
             file << t.to_csv() << std::endl;
         }
     }
+void Portfolio::load() {
+        std::ifstream file("trades.csv");
+        if(!(file.is_open())) {
+            std::cerr << "Cant open the file !" <<std::endl;
+            return;
+        }
+        std::string line;
+        std::getline(file, line);
+    }
