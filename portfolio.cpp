@@ -62,9 +62,24 @@ void Portfolio::load() {
         }
     };
 
-void Portfolio::print_history() {
-    for (const auto& t : trade) {
-        std::cout<<t.to_csv() << std::endl;
-    }
+void Portfolio::print_positions(double current_price) const {
+    std::cout << "--- OPEN POSITIONS ---" << std::endl;
+    for (const auto& pair : net_qty) {
+        const std::string& symbol = pair.first;
+        double qty = pair.second;
 
+        if (qty == 0.0) {
+            continue;
+        }
+
+        double cost = avg_cost.at(symbol);
+        double unrealized_pnl = (current_price - cost) * qty;
+
+        std::cout << "Symbol: " << symbol
+                  << " | Qty: " << qty
+                  << " | Avg Cost: $" << cost
+                  << " | Market Price: $" << current_price
+                  << " | Unrealized P&L: $" << unrealized_pnl
+                  << std::endl;
+    }
 }

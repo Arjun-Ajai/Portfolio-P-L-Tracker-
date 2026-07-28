@@ -10,4 +10,5 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 else()
     message(WARNING "Unknown compiler. Please add appropriate warning flags.")
 endif()
-add_executable(portfolio main.cpp trade.h)
+add_executable(portfolio main.cpp trade.h
+        portfolio.cpp)
