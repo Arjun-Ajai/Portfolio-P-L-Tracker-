@@ -10,7 +10,6 @@ struct Trade {
     std::string source;
 
     std::string to_csv() const {
-        return symbol + "|" + side + "|" + std::to_string(quantity) + "|" + std::to_string(price) + "|" + timestamp +
-               "|" + source;
+        return symbol + "|" + side + "|" + std::to_string(quantity) + "|" + std::to_string(price) + "|" + timestamp + "|" + source;
     }
 };
